@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -62,11 +63,37 @@ def update_sales_worksheet(data):
     print("Sales worksheet updated successfully.\n")
 
 
-data = get_sales_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+
+def view_all_stock():
+    """
+    Function to get the stock from google sheet
+    and show them as a list
+    """
+    get_all = SHEET.worksheet("stock").get_all_records()
+    for stock in get_all:
+        print_all_stock(stock)
+    
 
 
-data = get_sales_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+def print_all_stock(stock):
+    """
+    Function to get the stock from google sheet
+    and print them on the screen
+    """
+    all_stock = []
+    for number in (stock):
+        print(f'{number}')
+    print("-----------------------------------")
+    return all_stock
+
+def main():
+    """
+    Run all functions
+    """
+    data = get_sales_data()
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    view_all_stock()
+    print_all_stock(stock)
+print("Welcome to store sales Data Automation")
+main()
